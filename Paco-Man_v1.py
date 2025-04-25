@@ -11,7 +11,7 @@ pantalla = pygame.display.set_mode((ANCHO, ALTO))
 pygame.display.set_caption("Paco-Man cruza la carretera")
 
 # Colores
-VERDE_PASTO = (34, 139, 34)
+VERDE_PASTO = (144, 238, 144)
 AMARILLO_GALLINA = (255, 255, 0)
 AZUL_TECHO = (70, 130, 180)
 Negro_CARRETERA = (0, 0, 0)

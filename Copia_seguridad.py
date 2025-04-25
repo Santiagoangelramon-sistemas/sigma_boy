@@ -11,7 +11,7 @@ pantalla = pygame.display.set_mode((ANCHO, ALTO))
 pygame.display.set_caption("Paco-Man cruza la carretera")
 
 # Colores
-VERDE_PASTO = (34, 139, 34)
+VERDE_PASTO = (144, 238, 144)
 AMARILLO_GALLINA = (255, 255, 0)
 AZUL_TECHO = (70, 130, 180)
 Negro_CARRETERA = (0, 0, 0)
@@ -23,20 +23,20 @@ CARRITOS_ROJO = (178, 34, 34)
 class Paco_Man(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface((40, 40))
-        self.image.fill(AMARILLO_GALLINA)
+        imagen_original = pygame.image.load("ff46f6ecccb69caf430859c11e34ce7f-Photoroom.png").convert_alpha()
+        self.image = pygame.transform.scale(imagen_original, (40, 40))
         self.rect = self.image.get_rect()
         self.rect.center = (ANCHO // 2, ALTO - 50)
 
     def mover(self, keys):
         if keys[pygame.K_UP] and self.rect.top > 0:
-            self.rect.y -= 8
+            self.rect.y -= 5
         if keys[pygame.K_DOWN] and self.rect.bottom < ALTO:
-            self.rect.y += 8
+            self.rect.y += 5
         if keys[pygame.K_LEFT] and self.rect.left > 0:
-            self.rect.x -= 8
+            self.rect.x -= 5
         if keys[pygame.K_RIGHT] and self.rect.right < ANCHO:
-            self.rect.x += 8
+            self.rect.x += 5
 
     def reiniciar(self):
         self.rect.center = (ANCHO // 2, ALTO - 50)
@@ -45,8 +45,8 @@ class Paco_Man(pygame.sprite.Sprite):
 class Vehiculo(pygame.sprite.Sprite):
     def __init__(self, x, y, velocidad):
         super().__init__()
-        self.image = pygame.Surface((80, 40))
-        self.image.fill(CARRITOS_ROJO)
+        imagen_original = pygame.image.load("573-5738405_super-mario-kart-png-png-download-super-mario-Photoroom.png").convert_alpha()
+        self.image = pygame.transform.scale(imagen_original, (90, 40))
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
         self.velocidad = velocidad
@@ -69,6 +69,18 @@ def dibujar_casas(pantalla):
     for i in range(1):
         x = ANCHO - 130
         y = 50 + i * 180
+        pygame.draw.rect(pantalla, BLANCO_CASA, (x, y, 80, 100))
+        pygame.draw.polygon(pantalla, AZUL_TECHO, [(x, y), (x + 80, y), (x + 40, y - 50)])
+
+    for i in range(1):
+        x = ANCHO - 130
+        y = 550 + i * 110
+        pygame.draw.rect(pantalla, BLANCO_CASA, (x, y, 80, 100))
+        pygame.draw.polygon(pantalla, AZUL_TECHO, [(x, y), (x + 80, y), (x + 40, y - 50)])
+
+    for i in range(1):
+        x = 50
+        y = 550 + i * 180
         pygame.draw.rect(pantalla, BLANCO_CASA, (x, y, 80, 100))
         pygame.draw.polygon(pantalla, AZUL_TECHO, [(x, y), (x + 80, y), (x + 40, y - 50)])
 
