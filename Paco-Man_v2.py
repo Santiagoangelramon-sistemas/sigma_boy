@@ -106,6 +106,7 @@ todos_sprites.add(vehiculos)
 reloj = pygame.time.Clock()
 puntuacion = 0
 ejecutando = True
+vidas = 3  # Inicializamos el contador de vidas con 3
 
 # controlar de colisión
 colision_detectada = False
@@ -126,9 +127,12 @@ while ejecutando:
     # Verificar colisión de la gallina con los vehículos
     if pygame.sprite.spritecollideany(Pollo, vehiculos) and not colision_detectada:
         colision_detectada = True
-        print("Paco-Man fue golpeado !")
+        vidas -= 1
+        print(f"¡Paco-Man fue golpeado! Vidas restantes: {vidas}")
         Pollo.reiniciar()
-        puntuacion = 0  # Reiniciar
+        if vidas <= 0:
+            print("¡Se acabaron las vidas! Fin del juego.")
+            ejecutando = False
     elif not pygame.sprite.spritecollideany(Pollo, vehiculos):
         colision_detectada = False  # Restablecer el estado de colisión
 
@@ -150,8 +154,12 @@ while ejecutando:
 
     #Puntuación
     fuente = pygame.font.SysFont(None, 36)
-    texto = fuente.render(f"Puntuación: {puntuacion}", True, BLANCO)
-    pantalla.blit(texto, (10, 10))
+    texto_puntuacion = fuente.render(f"Puntuación: {puntuacion}", True, BLANCO)
+    pantalla.blit(texto_puntuacion, (10, 10))
+
+    #Vidas
+    texto_vidas = fuente.render(f"Vidas: {vidas}", True, BLANCO)
+    pantalla.blit(texto_vidas, (10, 50))
 
     # Actualizar
     pygame.display.flip()
